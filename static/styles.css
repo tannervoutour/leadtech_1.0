@@ -1,0 +1,287 @@
+/* Base Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+/* Sidebar (Navigation) */
+nav {
+    width: 200px;
+    background-color: #007bff;
+    color: white;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.chat-page-container {
+    display: flex; /* Ensures a horizontal layout */
+    flex-direction: row; /* Aligns child elements side by side */
+    gap: 20px; /* Adds spacing between the sources and chat sections */
+    max-width: 1200px; /* Optional: limits the page width */
+    margin: 20px auto; /* Centers the content horizontally */
+    height: 600px; /* Ensures consistent height for both sections */
+}
+
+.sources-container {
+    flex: 1; /* Makes this section take up 1 part of the available space */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto; /* Allows scrolling if the content overflows */
+}
+
+.chat-container {
+    flex: 2;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.chat-box {
+    height: 400px; /* Fixed height for the chat box */
+    overflow-y: auto; /* Allows scrolling if the chat history overflows */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.message {
+    margin-bottom: 15px; /* Add space between messages */
+    display: block;
+}
+
+
+
+.message.user span,
+.message.ai span {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 8px;
+    white-space: pre-wrap; /* Preserve newlines and allow text wrapping */
+    word-wrap: break-word; /* Ensure long words break properly */
+
+}
+
+.message.user {
+    text-align: right;
+}
+
+.message.ai {
+    text-align: left;
+}
+
+.message.user span {
+    color: #007bff;
+    background-color: #e6f4ff;
+}
+
+.message.ai span {
+    color: #333;
+    background-color: #e8e8e8;
+
+
+    .chat-input {
+        display: flex;
+        gap: 10px;
+    }
+
+    .chat-input input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .chat-input button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .chat-input button:hover {
+        background-color: #0056b3;
+    }
+
+}
+
+/* Chat Page Container */
+.chat-page-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    height: calc(100vh - 80px); /* Adjust to fit viewport */
+    overflow: hidden;
+}
+
+/* Sources Section */
+.sources-container {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Chat Section */
+.chat-container {
+    flex: 2;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.message {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message.user span {
+    align-self: flex-end;
+    color: #007bff;
+    background-color: #e6f4ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.message.ai span {
+    align-self: flex-start;
+    color: #333;
+    background-color: #e8e8e8;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Chat Input */
+.chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #0056b3;
+}
+
+.end-conversation {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.end-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.end-button:hover {
+    background-color: #cc0000;
+}
+
+/* Container for the machine cards */
+.machine-cards-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Individual card styling */
+.machine-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.machine-card:hover {
+    transform: scale(1.05);
+}
+
+.machine-card.selected {
+    background-color: #e6ffe6; /* Light green tint for selected card */
+    border-color: #00b300;
+}
+
+/* Disabled submit button */
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+

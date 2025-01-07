@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Create Log{% endblock %}
+
+{% block content %}
+<h2>Create a New Log</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="log_text">Log Text:</label><br>
+    <textarea id="log_text" name="log_text" rows="5" cols="50" required></textarea><br><br>
+
+    <label for="machine_slug">Select Machine:</label><br>
+    <select id="machine_slug" name="machine_slug" required>
+        <option value="" disabled selected>Select a machine</option>
+        {% for machine_slug, machine_name in machines %}
+            <option value="{{ machine_slug }}">{{ machine_name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
+        Create Log
+    </button>
+</form>
+{% endblock %}

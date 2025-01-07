@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Memories{% endblock %}
+
+{% block content %}
+<h1>Memories</h1>
+
+<!-- Django Messages -->
+{% if messages %}
+    <div id="django-messages" style="display: none;">
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- Filter Dropdown -->
+<form method="get" action="{% url 'memories' %}">
+    <label for="filter">Filter:</label>
+    <select name="filter" id="filter" onchange="this.form.submit()">
+        <option value="all" {% if filter_type == "all" %}selected{% endif %}>All Memories</option>
+        <option value="pending" {% if filter_type == "pending" %}selected{% endif %}>Pending Memories</option>
+        <option value="verified" {% if filter_type == "verified" %}selected{% endif %}>Verified Memories</option>
+    </select>
+</form>
+
+<!-- Memory List -->
+<ul>
+    {% for memory in memories %}
+        <li>
+            <p><strong>Date:</strong> {{ memory.date_created }}</p>
+            <p><strong>Workspace:</strong> {{ memory.workspace_slug }}</p>
+            <p><strong>Summary:</strong> {{ memory.summary }}</p>
+            <p><strong>Status:</strong>
+                {{ memory.verification_status|title }}
+            </p>
+            {% if memory.verification_status == "pending" %}
+                <a href="{% url 'verify_memory' memory.id %}" class="button">Verify</a>
+            {% endif %}
+        </li>
+    {% empty %}
+        <p>No memories found.</p>
+    {% endfor %}
+</ul>
+
+<!-- JavaScript for Popups -->
+<script>
+    // Display messages in a more user-friendly way
+    const messages = document.querySelectorAll('.message');
+    if (messages.length > 0) {
+        messages.forEach(msg => {
+            // For now, using alert; replace with toast notification for better UX
+            alert(msg.textContent.trim());
+        });
+    }
+</script>
+{% endblock %}

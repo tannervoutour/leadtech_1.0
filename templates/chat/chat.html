@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+<div class="chat-page-container">
+    <!-- Sources Section -->
+    <div class="sources-container">
+        <h2>Sources</h2>
+        {% if sources %}
+            {% for source in sources %}
+                <div class="source" style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; padding: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <strong>Title:</strong> {{ source.title }}<br>
+                    <button type="button" onclick="toggleSourceText({{ forloop.counter }})" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+                        Show/Hide Text
+                    </button>
+                    <div id="source-text-{{ forloop.counter }}" style="display: none; margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 8px; border: 1px solid #ccc;">
+                        <pre style="white-space: pre-wrap;">{{ source.text }}</pre>
+                    </div>
+
+                    <!-- Show "Search Page" button only if the page has not been found -->
+                    {% if not source.page %}
+                        <form method="post" action="{% url 'search_source_page' %}" style="margin-top: 10px;">
+                            {% csrf_token %}
+                            <input type="hidden" name="source_text" value="{{ source.text }}">
+                            <input type="hidden" name="source_title" value="{{ source.title }}">
+                            <button type="submit" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                Search Page
+                            </button>
+                        </form>
+                    {% endif %}
+
+                    <!-- Show "View Page" button only if the page has been found -->
+                    {% if source.page %}
+                        <a href="{{ source.page_url }}" target="_blank" style="margin-top: 10px; display: inline-block; padding: 5px 10px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">
+                            View Page
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No sources available for this conversation.</p>
+        {% endif %}
+    </div>
+
+    <!-- Chat Section -->
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            {% for message in messages %}
+                <div class="message {{ message.sender }}">
+                    <span>{{ message.text }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form method="post" class="chat-input">
+            {% csrf_token %}
+            <input type="text" name="message" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+
+        <!-- End Conversation Button -->
+        <form method="post" action="{% url 'end_conversation' %}" class="end-conversation">
+            {% csrf_token %}
+            <button type="submit" class="end-button">End Conversation</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Scroll chat box to bottom
+    const chatBox = document.getElementById('chat-box');
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Function to toggle source text visibility
+    function toggleSourceText(id) {
+        const sourceText = document.getElementById(`source-text-${id}`);
+        if (sourceText.style.display === "none") {
+            sourceText.style.display = "block";
+        } else {
+            sourceText.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}

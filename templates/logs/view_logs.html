@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}View Logs{% endblock %}
+
+{% block content %}
+<h2>View Logs</h2>
+
+<!-- Button to Navigate to Create Log -->
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'create_log' %}" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+        Create New Log
+    </a>
+</div>
+
+{% if logs %}
+    {% for log in logs %}
+        <div class="log-entry" style="margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; padding: 10px;">
+            <p><strong>Machine:</strong> {{ log.machine }}</p>
+            <p><strong>Log Text:</strong> {{ log.log_text }}</p>
+            <p><strong>Created At:</strong> {{ log.created_at }}</p>
+
+            {% if log.committed %}
+                <p style="color: green; font-weight: bold;">Committed to Machine</p>
+            {% else %}
+                <!-- Commit Button -->
+                <form method="post" action="{% url 'commit_log' log.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="padding: 5px 10px; background-color: #28a745; color: white; border: none; cursor: pointer;">
+                        Commit to Machine
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No logs available.</p>
+{% endif %}
+{% endblock %}

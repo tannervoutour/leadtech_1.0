@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Machine Selection{% endblock %}
+
+{% block content %}
+    <h1>Select a Machine</h1>
+    <form method="post" id="machine-selection-form">
+        {% csrf_token %}
+        <div class="machine-cards-container" style="display: flex; gap: 20px; justify-content: center; margin: 20px 0;">
+            <!-- Washer Card -->
+            <div class="machine-card" data-machine="washer" onclick="selectMachine(this)" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 200px; text-align: center; background-color: #fff; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s, background-color 0.2s;">
+                <h3>Washer</h3>
+                <p>Details about the Washer.</p>
+            </div>
+
+            <!-- Dryer Card -->
+            <div class="machine-card" data-machine="dryer" onclick="selectMachine(this)" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 200px; text-align: center; background-color: #fff; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s, background-color 0.2s;">
+                <h3>Dryer</h3>
+                <p>Details about the Dryer.</p>
+            </div>
+
+            <!-- XFM Card -->
+            <div class="machine-card" data-machine="xfm" onclick="selectMachine(this)" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 200px; text-align: center; background-color: #fff; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s, background-color 0.2s;">
+                <h3>XFM</h3>
+                <p>Details about the XFM.</p>
+            </div>
+
+            <!-- Ironer Card -->
+            <div class="machine-card" data-machine="ironer" onclick="selectMachine(this)" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 200px; text-align: center; background-color: #fff; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s, background-color 0.2s;">
+                <h3>Ironer</h3>
+                <p>Details about the Ironer.</p>
+            </div>
+        </div>
+
+        <!-- Hidden Input to Hold Selected Machine -->
+        <input type="hidden" name="machine" id="selected-machine" required>
+        <button type="submit" class="submit-button" disabled style="padding: 10px 20px; border: none; background-color: #007bff; color: white; border-radius: 5px; cursor: not-allowed;">
+            Submit
+        </button>
+    </form>
+
+    <script>
+        function selectMachine(card) {
+            document.querySelectorAll('.machine-card').forEach(card => {
+                card.style.backgroundColor = '#fff';
+                card.style.borderColor = '#ddd';
+            });
+
+            card.style.backgroundColor = '#e6ffe6';
+            card.style.borderColor = '#00b300';
+
+            const machine = card.getAttribute('data-machine');
+            document.getElementById('selected-machine').value = machine;
+
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.disabled = false;
+            submitButton.style.cursor = 'pointer';
+        }
+    </script>
+{% endblock %}
