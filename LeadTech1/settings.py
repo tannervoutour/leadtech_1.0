@@ -124,6 +124,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -152,6 +155,6 @@ MACHINE_SLUGS = {
 }
 
 # API constants
-API_KEY = "GYWHV6F-RM64JQN-QB7GHRW-4RVBJG8"
-BASE_URL = "http://localhost:3001/api"
+API_KEY = "FSATZFP-ZG54E24-M488WGZ-3108NBM"
+BASE_URL = "http://3.15.145.87:3001/api"
 OPENAI_KEY = "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"
